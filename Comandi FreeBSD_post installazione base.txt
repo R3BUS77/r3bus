@@ -1,0 +1,51 @@
+Comandi per Upgrade FreeBSD
+
+root@root:/ # freebsd-update fetch
+root@root:/ # freebsd-update install
+root@root:/ # pkg update
+root@root:/ # pkg upgrade
+root@root:/ # pkg install sudo
+root@root:/ # visudo
+
+poi vado a modificare decommentando/cancellando il # dal comando:
+# %wheel ALL=(ALL:ALL) NOPASSWD: ALL
+con il programma [vi] si attiva la modalità di edit con la i e poi ci si posiziona sul carattere da cancellare e si preme x
+ci si posiziona sul carattere # e si preme : poi si scriwe wq per salvare ed uscire.
+
+si edita il file sudoers
+root@root:/ # nano /usr/local/etc/sudoers
+
+##
+## User privilege specification
+##
+root ALL=(ALL:ALL) ALL
+username ALL=(ALL:ALL) ALL
+
+
+root@root:/ # pkg install drm-kmod
+root@root:/ # sysrc -f /etc/rc.conf kld_list+=i915kms  "per grafica intel"
+root@root:/ # pkg install libva-intel-driver mesa-libs mesa-dri
+root@root:/ # sysrc -f /etc/rc.conf kld_list+=acpi_video [**aumenta/abbassa luminosità schermo con tasto funzione** --da testare]
+root@root:/ # pkg install nano
+root@root:/ # pkg install xorg
+root@root:/ # pkg install xfce xfce4-goodies
+
+poi si deve modificare il fstab
+root@root:/ # nano /etc/fstab
+
+si inserisce il proc
+# Device                Mountpoint      FStype  Options         Dump    Pass#
+proc                    /proc           procfs  rw              0       0
+
+si attiva il demone
+root@root:/ # sysrc dbus_enable="YES"
+root@root:/ # hald_enable="YES"
+root@root:/ # pkg install lightdm lightdm-gtk-greeter
+root@root:/ # sysrc lightdm_enable="YES"
+
+root@root:/ # pkg install neofetch htop 
+
+editare il file rc.conf
+root@root:/ # nano /etc/rc.conf
+
+
